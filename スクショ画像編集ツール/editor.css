@@ -1,0 +1,241 @@
+/**
+ * スクリーンショット注釈エディタ - スタイルシート
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f5f5f5;
+  padding: 5px; /* 10pxから5pxに減らして表示領域を拡大 */
+}
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* ツールバー */
+.toolbar {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px; /* 15pxから12pxに減らしてコンパクトに */
+  margin-bottom: 10px; /* 15pxから10pxに減らして表示領域を拡大 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px; /* 20pxから15pxに減らしてコンパクトに */
+}
+
+.tool-group h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.tool-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tool-btn {
+  padding: 8px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  background-color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.tool-btn:hover {
+  border-color: #ff3b30;
+  background-color: #fff5f5;
+}
+
+.tool-btn.active {
+  border-color: #ff3b30;
+  background-color: #ff3b30;
+  color: #ffffff;
+}
+
+.action-group {
+  display: flex;
+  gap: 10px;
+}
+
+.action-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.load-btn {
+  background-color: #34c759;
+  color: #ffffff;
+}
+
+.load-btn:hover {
+  background-color: #28a745;
+}
+
+.undo-btn {
+  background-color: #ff9500;
+  color: #ffffff;
+}
+
+.undo-btn:hover {
+  background-color: #cc7700;
+}
+
+.save-btn {
+  background-color: #007aff;
+  color: #ffffff;
+}
+
+.save-btn:hover {
+  background-color: #0056b3;
+}
+
+.clear-btn {
+  background-color: #8e8e93;
+  color: #ffffff;
+}
+
+.clear-btn:hover {
+  background-color: #6e6e73;
+}
+
+/* メッセージ表示エリア */
+.message-area {
+  margin-bottom: 10px; /* 15pxから10pxに減らして表示領域を拡大 */
+  min-height: 30px;
+  padding: 10px;
+  border-radius: 6px;
+  display: none;
+}
+
+.message-area.show {
+  display: block;
+}
+
+.message-area.error {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef5350;
+}
+
+.message-area.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #66bb6a;
+}
+
+.message-area.info {
+  background-color: #e3f2fd;
+  color: #1565c0;
+  border: 1px solid #42a5f5;
+}
+
+/* Canvasコンテナ */
+.canvas-container {
+  position: relative;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px; /* 20pxから10pxに減らして表示領域を拡大 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* autoからhiddenに変更してスクロールを防ぐ */
+  min-height: 400px;
+  max-height: calc(100vh - 200px); /* 画面高さからツールバー等を引いた高さに制限 */
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+#backgroundCanvas,
+#annotationCanvas {
+  position: absolute;
+  top: 10px; /* 20pxから10pxに変更 */
+  left: 10px; /* 20pxから10pxに変更 */
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#annotationCanvas {
+  cursor: crosshair;
+}
+
+/* ドラッグ&ドロップゾーン */
+.drop-zone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.drop-zone.active {
+  display: flex;
+  pointer-events: auto;
+}
+
+.drop-zone-text {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  padding: 20px;
+  border: 3px dashed #ffffff;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .tool-buttons {
+    width: 100%;
+  }
+  
+  .tool-btn {
+    flex: 1;
+    min-width: 80px;
+  }
+  
+  .action-group {
+    width: 100%;
+  }
+  
+  .action-btn {
+    flex: 1;
+  }
+}
+

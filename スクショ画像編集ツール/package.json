@@ -1,0 +1,12 @@
+{
+  "name": "screenshot-annotation-editor",
+  "version": "1.0.0",
+  "description": "スクリーンショット注釈エディタ Chrome拡張 - アイコン生成用",
+  "scripts": {
+    "generate-icons": "node generate-icons.js"
+  },
+  "devDependencies": {
+    "canvas": "^2.11.2"
+  }
+}
+
